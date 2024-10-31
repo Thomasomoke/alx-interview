@@ -2,21 +2,21 @@
 
 
 def validUTF8(data):
-    '''
-    Bytes in current UTF-8 character
-    '''
+    """
+    Determine if a given data set represents a valid
+    """
     num_bytes = 0
 
-    '''Masks to check the first bits of each byte'''
+    # Masks to check the first bits of each byte
     mask1 = 1 << 7
     mask2 = 1 << 6
 
     for byte in data:
-        '''Use only the 8 least significant bits'''
+        # Use only the 8 least significant bits
         byte = byte & 0xFF
 
         if num_bytes == 0:
-            '''Determine UTF-8 byte length'''
+            # Determine UTF-8 byte length
             if (byte & mask1) == 0:
                 continue
             elif (byte & (mask1 | mask2)) == (mask1 | mask2):
@@ -37,3 +37,4 @@ def validUTF8(data):
             num_bytes -= 1
 
     return num_bytes == 0
+

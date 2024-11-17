@@ -27,15 +27,7 @@ request(url, (error, response, body) => {
             }
 
             const character = JSON.parse(body);
-            console.log(`Name: ${character.name}`);
-            console.log(`Height: ${character.height}`);
-            console.log(`Mass: ${character.mass}`);
-            console.log(`Hair Color: ${character.hair_color}`);
-            console.log(`Skin Color: ${character.skin_color}`);
-            console.log(`Eye Color: ${character.eye_color}`);
-            console.log(`Birth Year: ${character.birth_year}`);
-            console.log(`Gender: ${character.gender}`);
-            console.log('-------------------------');
+            console.log(character.name);
         });
     });
 });

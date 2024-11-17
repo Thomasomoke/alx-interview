@@ -1,38 +1,38 @@
 #!/usr/bin/python3
-
+"""
+A method that determines if a given data set represents a valid UTF-8 encoding.
+"""
 
 def validUTF8(data):
     """
-    Determine if a given data set represents a valid
+    Validate if the given data set represents a valid UTF-8 encoding.
+
+    Args:
+        data (list): A list of integers representing bytes.
+
+    Returns:
+        bool: True if data is a valid UTF-8 encoding, else False.
     """
     num_bytes = 0
 
-    # Masks to check the first bits of each byte
-    mask1 = 1 << 7
-    mask2 = 1 << 6
-
     for byte in data:
         # Use only the 8 least significant bits
-        byte = byte & 0xFF
+        byte &= 0xFF
 
         if num_bytes == 0:
             # Determine UTF-8 byte length
-            if (byte & mask1) == 0:
+            if (byte & 0b10000000) == 0:
                 continue
-            elif (byte & (mask1 | mask2)) == (mask1 | mask2):
+            elif (byte & 0b11000000) == 0b11000000:
                 num_bytes = 1
-            elif (byte & (mask1 | mask2 | (1 << 5))) == (
-                mask1 | mask2 | (1 << 5)
-            ):
+            elif (byte & 0b11100000) == 0b11100000:
                 num_bytes = 2
-            elif (byte & (mask1 | mask2 | (1 << 5) | (1 << 4))) == (
-                mask1 | mask2 | (1 << 5) | (1 << 4)
-            ):
+            elif (byte & 0b11110000) == 0b11110000:
                 num_bytes = 3
             else:
                 return False
         else:
-            if (byte & (mask1 | mask2)) != mask1:
+            if (byte & 0b11000000) != 0b10000000:
                 return False
             num_bytes -= 1
 

@@ -14,4 +14,3 @@ def makeChange(coins, total):
 
     # If dp[total] is still infinity, then it is not possible to make the total
     return dp[total] if dp[total] != float('inf') else -1
-

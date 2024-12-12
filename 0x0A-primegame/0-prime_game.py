@@ -1,19 +1,11 @@
 #!/usr/bin/python3
 def isWinner(x, nums):
-    """
-    Determines the winner after x rounds.
-
-    Args:
-        x (int): Number of rounds.
-        nums (list): List of n values.
-
-    Returns:
-        str: "Maria", "Ben", or None.
-    """
+    "Determine the winner after x rounds."
     if not nums or x < 1:
         return None
 
     def sieve_of_eratosthenes(max_num):
+        "Generate prime numbers up to max_num."
         primes = [True] * (max_num + 1)
         primes[0] = primes[1] = False
         for i in range(2, int(max_num**0.5) + 1):
@@ -46,4 +38,5 @@ def isWinner(x, nums):
 
 
 if __name__ == "__main__":
+    "Run example case."
     print("Winner:", isWinner(5, [2, 5, 1, 4, 3]))
